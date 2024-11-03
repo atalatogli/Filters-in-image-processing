@@ -176,7 +176,7 @@ void Image::gaussian_filter(double sigma) const {
     file.close();
 }
 
-// Gets the value of specific pixel's specific color.
+// Returns the respective color value of the given pixel.
 int Image::get(int row, int column, int color) const {
     if (row >= 0 and row < length and column >= 0 and column < width) {
         return matrix[row][column][color];
@@ -185,7 +185,7 @@ int Image::get(int row, int column, int color) const {
     }
 }
 
-// Calculates the scalar product of the given vectors.
+// Returns the scalar product of the given vectors.
 double Image::multiply(std::vector<int> const & lhs, std::vector<double> const & rhs) const {
     double scalar_product = 0;
     for (int i = 0; i != 3; ++i) {
@@ -194,7 +194,7 @@ double Image::multiply(std::vector<int> const & lhs, std::vector<double> const &
     return scalar_product;
 }
 
-// Increases or decreases the color value by a given number.
+// Changes the color value by a given number.
 int Image::manual_value(int value, int change) const {
     if (change < 0) {
         return std::max(value + change, 0);
@@ -230,7 +230,7 @@ int Image::median_value(int row, int column, int color) const {
     return median_array[4];
 }
 
-// Finds the respective gaussian operator for the given sigma.
+// Builds the respective gaussian operator for the given sigma.
 void Image::update_operator(double sigma) const {
     for (std::pair<int, int> const & shift : shifts) {
         gaussian_operator[shift.first + 1][shift.second + 1] = exp((shift.first * shift.first + shift.second * shift.second) / (-2 * sigma * sigma)) / (2 * std::numbers::pi * sigma * sigma);
@@ -244,7 +244,7 @@ void Image::update_array(int row, int column, int color) const {
     }
 }
 
-// Finds the sum of products of gaussian operator and array of color values.
+// Makes calculations using gaussian operator and array of color values.
 int Image::gaussian_value() const {
     return multiply(gaussian_array[0], gaussian_operator[0]) + multiply(gaussian_array[1], gaussian_operator[1]) + multiply(gaussian_array[2], gaussian_operator[2]);
 }
