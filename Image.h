@@ -38,13 +38,13 @@ private:
     // Disables assignment operator for our class.
     Image & operator = (Image const & other);
 
-    // Gets the value of specific pixel's specific color.
+    // Returns the respective color value of the given pixel.
     int get(int row, int column, int color) const;
 
-    // Calculates the scalar product of the given vectors.
+    // Returns the scalar product of the given vectors.
     double multiply(std::vector<int> const & lhs, std::vector<double> const & rhs) const;
 
-    // Increases or decreases the color value by a given number.
+    // Changes the color value by a given number.
     int manual_value(int value, int change) const;
 
     // Finds the maximal color value among the neighboring pixels.
@@ -56,13 +56,13 @@ private:
     // Finds the median color value among the neighboring pixels.
     int median_value(int row, int column, int color) const;
 
-    // Finds the respective gaussian operator for the given sigma.
+    // Builds the respective gaussian operator for the given sigma.
     void update_operator(double sigma) const;
 
     // Builds an array of color values from the neighboring pixels.
     void update_array(int row, int column, int color) const;
 
-    // Finds the sum of products of gaussian operator and array of color values.
+    // Makes calculations using gaussian operator and array of color values.
     int gaussian_value() const;
 
     std::string type;
